@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AromaVault - Luxury Perfumes</title>
+    <style>
+        /* CSS for the entire website */
+
+        :root {
+            --primary-color: #2c2c2c; /* Deep Charcoal */
+            --secondary-color: #d1b89b; /* Refined Beige */
+            --accent-color: #d1b89b;
+            --background-color: #f8f8f8; /* Lighter background for glass effect */
+            --light-bg-color: #f4f4f4;
+            --dark-text-color: #333; /* Darker text for contrast on glass */
+            --light-text-color: #f9f9f9;
+            --button-hover-color: #8c7851;
+            /* Updated box shadow for 3D effect */
+            --box-shadow: 0 10px 20px rgba(0,0,0,0.15), 0 6px 6px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--dark-text-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white for glass effect */
+            backdrop-filter: blur(10px); /* Frosted glass effect */
+            -webkit-backdrop-filter: blur(10px); /* For Safari */
+            padding: 15px 0; /* Adjusted padding */
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Lighter shadow for glass */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Subtle border for definition */
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 50px; /* Adjust logo size as needed */
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.1);
+        }
+
+        .logo a {
+            font-size: 2.2em; /* Adjusted logo text size */
+            font-weight: bold;
+            text-decoration: none;
+            color: var(--dark-text-color); /* Darker color for contrast on light glass */
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+        }
+
+        .logo a:hover {
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px; /* Adjusted gap */
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark-text-color); /* Darker color for contrast on light glass */
+            font-size: 1em;
+            font-weight: bold;
+            transition: color 0.3s ease, transform 0.2s;
+        }
+
+        nav a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .cart-icon {
+            font-size: 1.5em;
+            cursor: pointer;
+            position: relative;
+            color: var(--dark-text-color); /* Darker color for contrast */
+        }
+
+        #cart-count {
+            position: absolute;
+            top: -5px;
+            right: -10px;
+            background-color: var(--accent-color);
+            color: white; /* Changed to white for better contrast */
+            border-radius: 50%;
+            padding: 2px 6px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+
+        .hero {
+            background: url('https://images.unsplash.com/photo-1541103316024-4ff5d66141a6?ixlib=rb-4.0.3&auto=format&fit=crop') no-repeat center center/cover;
+            color: var(--light-text-color);
+            text-align: center;
+            padding: 150px 20px;
+            position: relative;
+        }
+
+        /* Added a subtle gradient overlay for more depth */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.3));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--button-hover-color);
+            color: white;
+            transform: translateY(-2px); /* Lift button on hover */
+        }
+
+        main {
+            padding: 50px 0;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-color);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .filter-buttons {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .filter-buttons button {
+            background-color: var(--light-bg-color);
+            border: 1px solid var(--secondary-color);
+            padding: 10px 20px;
+            margin: 0 5px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .filter-buttons button.active,
+        .filter-buttons button:hover {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background-color: var(--light-bg-color);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px) scale(1.03) perspective(1000px) rotateY(2deg); /* Add 3D rotation on hover */
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-info h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .product-info .price {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .add-to-cart {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            padding: 10px 25px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--button-hover-color);
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--light-text-color);
+            padding: 40px 0;
+            text-align: center;
+            margin-top: 50px;
+            box-shadow: 0 -4px 8px rgba(0,0,0,0.1);
+        }
+
+        footer .container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-column {
+            flex-basis: 250px;
+            text-align: left;
+        }
+
+        .footer-column h4 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+
+        .footer-column p {
+            font-size: 0.9em;
+            line-height: 1.8;
+            margin-bottom: 10px;
+        }
+
+        .social-icons a {
+            color: var(--light-text-color);
+            font-size: 1.5em;
+            margin-right: 15px;
+        }
+        
+        .social-icons a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Cart Modal Styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: var(--box-shadow); /* Apply 3D shadow to modal */
+            position: relative;
+        }
+
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        #cart-items {
+            list-style: none;
+            padding: 0;
+        }
+
+        #cart-items li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        #cart-total {
+            text-align: right;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+        
+        /* General Page Styling for Checkout/Delivery */
+        .checkout-page {
+            display: none;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .checkout-container {
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow); /* Apply 3D shadow to checkout container */
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            position: relative; /* Added for back button positioning */
+        }
+
+        .checkout-container h1 {
+            font-size: 2.5em;
+            color: #2c2c2c;
+            margin-bottom: 20px;
+        }
+        .checkout-container .btn {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        /* Delivery Form Styling */
+        #delivery-form-page input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        
+        .checkout-details {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+
+        .checkout-details p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        .checkout-details strong {
+            color: #8c7851;
+        }
+        
+        .btn-whatsapp {
+            display: inline-block;
+            background-color: #25D366;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+            font-size: 1.1em;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #128C7E;
+        }
+
+        /* Back Button Styling */
+        .back-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: none;
+            border: none;
+            font-size: 2em; /* Adjusted size for a better look */
+            cursor: pointer;
+            color: #4b4b4b;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+
+        .back-btn:hover {
+            opacity: 1;
+        }
+
+        /* Animated Confirmation Styling */
+        #animated-confirm-page {
+            display: none;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        
+        .animated-button {
+            position: relative;
+            background-color: var(--primary-color); /* Updated to primary color */
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            overflow: hidden;
+            width: 250px;
+            margin: 0 auto;
+            transition: background-color 0.4s ease;
+        }
+
+        .animated-button:hover {
+            background-color: var(--button-hover-color);
+        }
+
+        .animated-button .default-text {
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .animated-button.loading .default-text,
+        .animated-button.success .default-text {
+            transform: translateY(-50px);
+        }
+
+        .animated-button .success-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, 150%) scale(0);
+            width: 24px;
+            height: 24px;
+            fill: white;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .animated-button.success .success-icon {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        @media (max-width: 768px) {
+            header .container {
+                flex-direction: column;
+            }
+            nav ul {
+                margin-top: 15px;
+                gap: 15px;
+            }
+            .hero h1 {
+                font-size: 2.5em;
+            }
+            .hero p {
+                font-size: 1.2em;
+            }
+            .filter-buttons {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-column {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="main-content">
+        <header>
+            <div class="container">
+                <div class="logo">
+                    <img src="https://assets-c3d3.kxcdn.com/uploads/images/products/26359/IMPERIUM-Eau-de-Parfum-100-ml.jpg" alt="AromaVault Logo">
+                    <a href="#">AromaVault</a>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#products">Shop</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="cart-icon" id="cart-icon">
+                    <span>🛒</span>
+                    <span id="cart-count">0</span>
+                </div>
+            </div>
+        </header>
+
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Discover Your Signature Scent</h1>
+                <p>Elegance and luxury in every bottle. Explore our curated collection of fine fragrances.</p>
+                <a href="#products" class="btn">Shop Now</a>
+            </div>
+        </section>
+
+        <main>
+            <section id="products" class="container">
+                <h2>Our Collection</h2>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-category="all">All</button>
+                    <button class="filter-btn" data-category="for-her">For Her</button>
+                    <button class="filter-btn" data-category="for-him">For Him</button>
+                </div>
+
+                <div class="product-grid" id="product-grid">
+                    
+                    <div class="product-card" data-category="for-her">
+                        <img src="1000796745.jpg" alt="Flowerbomb Perfume">
+                        <div class="product-info">
+                            <h3 class="product-title">Flowerbomb</h3>
+                            <p class="product-price" data-price="130">$130.00</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-category="for-her">
+                        <img src="1000796740.jpg" alt="Olympea Perfume">
+                        <div class="product-info">
+                            <h3 class="product-title">Olympea</h3>
+                            <p class="product-price" data-price="105">$105.00</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="for-her">
+                        <img src="1000796741.jpg" alt="Ophylia Perfume">
+                        <div class="product-info">
+                            <h3 class="product-title">Ophylia</h3>
+                            <p class="product-price" data-price="95">$95.00</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="for-her">
+                        <img src="1000796742.jpg" alt="J'adore Perfume">
+                        <div class="product-info">
+                            <h3 class="product-title">J'adore</h3>
+                            <p class="product-price" data-price="145">$145.00</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                    
+                    <div class="product-card" data-category="for-her">
+                        <img src="1000796743.jpg" alt="Idole Perfume">
+                        <div class="product-info">
+                            <h3 class="product-title">Idole</h3>
+                            <p class="product-price" data-price="115">$115.00</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="for-her">
+                        <img src="1000796744.jpg" alt="Libre Perfume">
+                        <div class="product-info">
+                            <h3 class="product-title">Libre</h3>
+                            <p class="product-price" data-price="125">$125.00</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="for-him">
+                        <img src="1000796771.jpg" alt="Puremale Perfume">
+                        <div class="product-info">
+                            <h3 class="product-title">Puremale</h3>
+                            <p class="product-price" data-price="105">$105.00</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="for-him">
+                        <img src="1000796772.jpg" alt="Intense Noir Perfume">
+                        <div class="product-info">
+                            <h3 class="product-title">Intense Noir</h3>
+                            <p class="product-price" data-price="110">$110.00</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="for-him">
+                        <img src="1000796768.jpg" alt="Suave Perfume">
+                        <div class="product-info">
+                            <h3 class="product-title">Suave</h3>
+                            <p class="product-price" data-price="95">$95.00</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+
+                    <div class="product-card" data-category="for-him">
+                        <img src="1000796769.jpg" alt="Ultra Male Perfume">
+                        <div class="product-info">
+                            <h3 class="product-title">Ultra Male</h3>
+                            <p class="product-price" data-price="110">$110.00</p>
+                            <button class="add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <div class="container">
+                <div class="footer-column">
+                    <h4>About Us</h4>
+                    <p>AromaVault offers a curated selection of luxury perfumes for every occasion. We believe in the power of scent to evoke memories and define moments.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Customer Service</h4>
+                    <p>Returns & Exchanges</p>
+                    <p>Shipping & Delivery</p>
+                    <p>Privacy Policy</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Contact</h4>
+                    <p>Email: info@aromavault.com</p>
+                    <p>Phone: +1 (555) 123-4567</p>
+                    <div class="social-icons">
+                        <a href="#">F</a>
+                        <a href="#">T</a>
+                        <a href="#">I</a>
+                    </div>
+                </div>
+            </div>
+            <p style="margin-top: 20px; font-size: 0.9em;">&copy; 2023 AromaVault. All Rights Reserved.</p>
+        </footer>
+
+        <div id="cart-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h2>Your Cart</h2>
+                <ul id="cart-items">
+                    </ul>
+                <p id="cart-total">Total: $0.00</p>
+                <button id="checkout-btn" class="btn" style="width: 100%; margin-top: 20px;">Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="delivery-form-page" class="checkout-page">
+        <div class="checkout-container">
+            <button class="back-btn" onclick="goBack()">&#8592;</button>
+            <h1>Delivery Information</h1>
+            <p>Please provide your details for delivery. Delivery is free!</p>
+            <form id="delivery-form">
+                <input type="text" id="customer-name" placeholder="Your Full Name" required>
+                <input type="text" id="customer-address" placeholder="Your Delivery Address" required>
+                <input type="tel" id="customer-phone" placeholder="Your Phone Number" required>
+                <button type="submit" class="btn">Proceed to Payment</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="checkout-page" class="checkout-page">
+        <div class="checkout-container">
+            <button class="back-btn" onclick="goBack()">&#8592;</button>
+            <h1>Complete Your Payment</h1>
+            <p>Please make a bank transfer to the account details below and click 'I've Paid' to notify us.</p>
+            <div class="checkout-details">
+                <p><strong>Bank:</strong> KUDA</p>
+                <p><strong>Account Name:</strong> CHUKWUEMEKA DAVID NWANZE</p>
+                <p><strong>Account Number:</strong> 2044357160</p>
+                <p id="total-amount"><strong>Total:</strong> </p>
+            </div>
+            <button id="whatsapp-link" class="btn-whatsapp">I've Paid</button>
+        </div>
+    </div>
+    
+    <div id="animated-confirm-page" style="display: none; height: 100vh; justify-content: center; align-items: center; background-color: #f4f4f4; padding: 20px;">
+        <div style="background-color: #fff; padding: 40px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); max-width: 500px; width: 100%; text-align: center;">
+            <h1 style="font-size: 2.5em; color: #2c2c2c; margin-bottom: 20px;">Order Placed! 🎉</h1>
+            <p style="font-size: 1.2em; margin-bottom: 30px;">Your payment confirmation has been sent to us. We will process your order shortly.</p>
+            
+            <div class="animated-button">
+                <span class="default-text">Complete Order</span>
+                <svg class="success-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path d="M9 16.2l-3.5-3.5a1 1 0 10-1.4 1.4l4.2 4.2a1 1 0 001.4 0l8.2-8.2a1 1 0 00-1.4-1.4L9 16.2z"/>
+                </svg>
+            </div>
+        </div>
+    </div>
+    <iframe id="whatsapp-iframe" style="display: none;"></iframe>
+
+    <script>
+        // JavaScript for interactivity
+        document.addEventListener('DOMContentLoaded', () => {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const productCards = document.querySelectorAll('.product-card');
+            const cartIcon = document.getElementById('cart-icon');
+            const cartModal = document.getElementById('cart-modal');
+            const closeBtn = document.querySelector('.close-btn');
+            const cartItemsList = document.getElementById('cart-items');
+            const cartTotalEl = document.getElementById('cart-total');
+            const cartCountEl = document.getElementById('cart-count');
+            const checkoutBtn = document.getElementById('checkout-btn');
+            
+            // New elements for the different pages
+            const mainContent = document.getElementById('main-content');
+            const deliveryFormPage = document.getElementById('delivery-form-page');
+            const deliveryForm = document.getElementById('delivery-form');
+            const checkoutPage = document.getElementById('checkout-page');
+            const animatedConfirmPage = document.getElementById('animated-confirm-page');
+            const totalAmountEl = document.getElementById('total-amount');
+            const whatsappLink = document.getElementById('whatsapp-link');
+            const animatedButton = document.querySelector('.animated-button');
+            const whatsappIframe = document.getElementById('whatsapp-iframe');
+            
+            let cart = [];
+
+            // Global function to navigate back
+            window.goBack = function() {
+                window.history.back();
+            };
+
+            // Product Filtering Logic
+            filterButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    e.target.classList.add('active');
+                    const category = e.target.getAttribute('data-category');
+
+                    productCards.forEach(card => {
+                        const cardCategory = card.getAttribute('data-category');
+                        if (category === 'all' || cardCategory === category) {
+                            card.style.display = 'block';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Add to Cart Logic
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const productCard = e.target.closest('.product-card');
+                    const title = productCard.querySelector('.product-title').textContent;
+                    const price = parseFloat(productCard.querySelector('.product-price').getAttribute('data-price'));
+
+                    addToCart(title, price);
+                });
+            });
+
+            function addToCart(title, price) {
+                const existingItem = cart.find(item => item.title === title);
+
+                if (existingItem) {
+                    existingItem.quantity++;
+                } else {
+                    cart.push({ title, price, quantity: 1 });
+                }
+
+                updateCartDisplay();
+            }
+
+            function updateCartDisplay() {
+                cartItemsList.innerHTML = '';
+                let total = 0;
+                let itemCount = 0;
+
+                cart.forEach(item => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `<span>${item.title} (${item.quantity})</span><span>$${(item.price * item.quantity).toFixed(2)}</span>`;
+                    cartItemsList.appendChild(li);
+                    total += item.price * item.quantity;
+                    itemCount += item.quantity;
+                });
+
+                cartTotalEl.textContent = `Total: $${total.toFixed(2)}`;
+                cartCountEl.textContent = itemCount;
+            }
+
+            // Cart Modal Logic
+            cartIcon.addEventListener('click', () => {
+                cartModal.style.display = 'block';
+            });
+
+            closeBtn.addEventListener('click', () => {
+                cartModal.style.display = 'none';
+            });
+
+            window.addEventListener('click', (e) => {
+                if (e.target == cartModal) {
+                    cartModal.style.display = 'none';
+                }
+            });
+
+            // Handle Checkout Button (Show Delivery Form)
+            checkoutBtn.addEventListener('click', () => {
+                if (cart.length === 0) {
+                    alert("Your cart is empty. Please add items before checking out.");
+                    return;
+                }
+                cartModal.style.display = 'none';
+                mainContent.style.display = 'none';
+                deliveryFormPage.style.display = 'flex';
+                
+                // Push state to browser history
+                history.pushState({ page: 'delivery' }, 'Delivery Information', '#delivery');
+            });
+            
+            // Handle Delivery Form Submission (Show Payment Page & Send Delivery Details)
+            deliveryForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // Get form data
+                const name = document.getElementById('customer-name').value;
+                const address = document.getElementById('customer-address').value;
+                const phone = document.getElementById('customer-phone').value;
+                const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+                const orderSummary = cart.map(item => `${item.title} x ${item.quantity} ($${(item.price * item.quantity).toFixed(2)})`).join('\n- ');
+
+
+                // Create the WhatsApp message for delivery
+                const deliveryMessage = `*New AromaVault Order* ✨\n\n*Order Details:*\n- ${orderSummary}\n\n*Customer Details:*\nName: ${name}\nAddress: ${address}\nPhone: ${phone}\n\n*Total Due: $${total.toFixed(2)}*\n\nAwaiting Payment Confirmation...`;
+                
+                // Construct the WhatsApp URL for the delivery message
+                const phoneNumber = '2349157080830'; 
+                const encodedDeliveryMessage = encodeURIComponent(deliveryMessage);
+                const whatsappDeliveryURL = `https://wa.me/${phoneNumber}?text=${encodedDeliveryMessage}`;
+                
+                // Send the delivery message silently (by setting the iframe source)
+                whatsappIframe.src = whatsappDeliveryURL;
+
+                // Hide delivery form and show payment page
+                deliveryFormPage.style.display = 'none';
+                checkoutPage.style.display = 'flex';
+                
+                // Push state to browser history
+                history.pushState({ page: 'checkout' }, 'Complete Your Payment', '#checkout');
+
+                // Update the total on the payment page
+                totalAmountEl.textContent = `Total: $${total.toFixed(2)}`;
+            });
+            
+            // Handle "I've Paid" button with animation and silent message
+            whatsappLink.addEventListener('click', (event) => {
+                event.preventDefault();
+
+                // Show the animated confirmation page
+                checkoutPage.style.display = 'none';
+                animatedConfirmPage.style.display = 'flex';
+                
+                // Add the loading and success classes to trigger the animation
+                animatedButton.classList.add('loading');
+                
+                setTimeout(() => {
+                    animatedButton.classList.remove('loading');
+                    animatedButton.classList.add('success');
+                }, 1000); // Wait 1 second before showing the checkmark
+
+                // Construct and send the WhatsApp payment confirmation silently
+                const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+                const phoneNumber = '2349157080830'; 
+                const paymentMessage = `*Payment Confirmation* ✅\n\nI have just made a payment for my AromaVault order.\nTotal: $${total.toFixed(2)} transferred to KUDA account 2044357160.\n\nThank you!`;
+                
+                const encodedPaymentMessage = encodeURIComponent(paymentMessage);
+                const whatsappPaymentURL = `https://wa.me/${phoneNumber}?text=${encodedPaymentMessage}`;
+                
+                // Set the iframe source to trigger the WhatsApp message
+                whatsappIframe.src = whatsappPaymentURL;
+
+                // Optional: Clear the cart after confirmation
+                cart = [];
+                updateCartDisplay(); 
+            });
+            
+            // Handle browser's back/forward buttons (Restored state-based logic)
+            window.addEventListener('popstate', (event) => {
+                const state = event.state ? event.state.page : 'main';
+                
+                mainContent.style.display = (state === 'main' || state === null) ? 'block' : 'none';
+                deliveryFormPage.style.display = (state === 'delivery') ? 'flex' : 'none';
+                checkoutPage.style.display = (state === 'checkout') ? 'flex' : 'none';
+                animatedConfirmPage.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
